@@ -12,5 +12,15 @@ final class ChopTest extends TestCase
     {
         self::assertEquals(-1, Chop::chop(3, []));
     }
+
+    public function testTwo()
+    {
+        self::assertEquals(-1, Chop::chop(3, [1]));
+    }
+
+    public function testThree()
+    {
+        self::assertEquals(0, Chop::chop(1, [1]));
+    }
 }
 
