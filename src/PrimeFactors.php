@@ -12,7 +12,13 @@ final class PrimeFactors
      */
     public static function generate(int $number): array
     {
-        return [];
+        $primes = [];
+
+        if ($number === 2) {
+            $primes[] = 2;
+        }
+
+        return $primes;
     }
 }
 
