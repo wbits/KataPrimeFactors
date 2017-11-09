@@ -15,7 +15,13 @@ final class PrimeFactors
         $primes = [];
 
         if ($number > 1) {
-            $primes[] = $number;
+            if ($number%2 === 0) {
+                $primes[] = 2;
+                $number /= 2;
+            }
+            if ($number > 1) {
+                $primes[] = $number;
+            }
         }
 
         return $primes;
