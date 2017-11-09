@@ -20,9 +20,10 @@ final class PrimeFactors
                 $primes[] = $candidate;
                 $number /= $candidate;
             }
-            if ($number > 1) {
-                $primes[] = $number;
-            }
+        }
+
+        if ($number > 1) {
+            $primes[] = $number;
         }
 
         return $primes;
