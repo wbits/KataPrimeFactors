@@ -16,9 +16,8 @@ final class PrimeFactors
         $candidate = 2;
 
         while ($number > 1) {
-            while ($number % $candidate === 0) {
+            for (; $number % $candidate === 0; $number /= $candidate) {
                 $primes[] = $candidate;
-                $number /= $candidate;
             }
             $candidate++;
         }
