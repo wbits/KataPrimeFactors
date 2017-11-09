@@ -12,7 +12,7 @@ final class PrimeFactors
      */
     public static function generate(int $number): array
     {
-
+        return [];
     }
 }
 
