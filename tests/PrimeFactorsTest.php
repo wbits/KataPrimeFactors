@@ -17,5 +17,10 @@ final class PrimeFactorsTest extends TestCase
     {
         self::assertEquals([2], PrimeFactors::generate(2));
     }
+
+    public function testThree()
+    {
+        self::assertEquals([3], PrimeFactors::generate(3));
+    }
 }
 

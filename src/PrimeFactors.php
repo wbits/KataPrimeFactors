@@ -14,7 +14,7 @@ final class PrimeFactors
     {
         $primes = [];
 
-        if ($number === 2) {
+        if ($number > 1) {
             $primes[] = 2;
         }
 
