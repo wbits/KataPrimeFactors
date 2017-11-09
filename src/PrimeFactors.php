@@ -13,9 +13,9 @@ final class PrimeFactors
     public static function generate(int $number): array
     {
         $primes = [];
+        $candidate = 2;
 
         if ($number > 1) {
-            $candidate = 2;
             while ($number % $candidate === 0) {
                 $primes[] = $candidate;
                 $number /= $candidate;
