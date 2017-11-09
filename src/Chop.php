@@ -8,7 +8,11 @@ final class Chop
 {
     public static function chop(int $n, array $list): int
     {
-        return -1;
+        if (! in_array($n, $list)) {
+            return -1;
+        }
+
+        return array_search($n, $list);
     }
 }
 
