@@ -1,6 +1,5 @@
 {
-  "name": "vendor_name/package_name",
-  "description": "description_text",
+  "name": "wbits/KataPrimeFactors",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
