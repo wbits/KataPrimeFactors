@@ -13,17 +13,11 @@ final class PrimeFactors
     public static function generate(int $number): array
     {
         $primes = [];
-        $candidate = 2;
 
-        while ($number > 1) {
+        for ($candidate = 2; $number > 1; $candidate++) {
             for (; $number % $candidate === 0; $number /= $candidate) {
                 $primes[] = $candidate;
             }
-            $candidate++;
-        }
-
-        if ($number > 1) {
-            $primes[] = $number;
         }
 
         return $primes;
