@@ -15,11 +15,12 @@ final class PrimeFactors
         $primes = [];
         $candidate = 2;
 
-        if ($number > 1) {
+        while ($number > 1) {
             while ($number % $candidate === 0) {
                 $primes[] = $candidate;
                 $number /= $candidate;
             }
+            $candidate++;
         }
 
         if ($number > 1) {
