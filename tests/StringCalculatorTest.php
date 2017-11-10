@@ -32,5 +32,12 @@ final class StringCalculatorTest extends TestCase
     {
         self::assertEquals(3, StringCalculator::add("//;\n1;2"));
     }
+
+    public function testItThrowsAnExceptionWhenANegativeNumberIsPassed()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        StringCalculator::add('-1');
+    }
 }
 
