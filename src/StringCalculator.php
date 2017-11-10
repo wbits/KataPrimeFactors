@@ -32,6 +32,9 @@ final class StringCalculator
 
     private function addNumber(int $number)
     {
+        if ($number > 1000) {
+            return;
+        }
         if ($number < 0) {
             $this->addNegative($number);
         }
