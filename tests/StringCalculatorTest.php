@@ -22,5 +22,10 @@ final class StringCalculatorTest extends TestCase
     {
         self::assertEquals(3, StringCalculator::add('1,2'));
     }
+
+    public function testItSupportsNewLines()
+    {
+        self::assertEquals(6, StringCalculator::add("1\n2,3"));
+    }
 }
 
