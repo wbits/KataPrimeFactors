@@ -21,6 +21,9 @@ final class StringCalculator
         {
             $parts = explode($delimiter, $line);
             foreach ($parts as $number) {
+                if ((int) $number < 0) {
+                    throw new \InvalidArgumentException('foo');
+                }
                 $result += (int) $number;
             }
         }
