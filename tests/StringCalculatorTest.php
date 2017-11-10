@@ -17,5 +17,10 @@ final class StringCalculatorTest extends TestCase
     {
         self::assertEquals(1, StringCalculator::add('1'));
     }
+
+    public function testItAddsMultipleNumbersInAString()
+    {
+        self::assertEquals(3, StringCalculator::add('1,2'));
+    }
 }
 

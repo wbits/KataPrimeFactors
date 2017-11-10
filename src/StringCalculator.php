@@ -8,7 +8,14 @@ final class StringCalculator
 {
     public static function add(string $numbers): int
     {
-        return (int) $numbers;
+        $parts = explode(',', $numbers);
+        $result = 0;
+
+        foreach ($parts as $number) {
+            $result += (int) $number;
+        }
+
+        return $result;
     }
 }
 
