@@ -58,5 +58,10 @@ final class StringCalculatorTest extends TestCase
 
         $this->calculator->add('-1,-2,3');
     }
+
+    public function testItIgnoresNumbersBiggerThanThousand()
+    {
+        self::assertEquals(2, $this->calculator->add('2,1001'));
+    }
 }
 
