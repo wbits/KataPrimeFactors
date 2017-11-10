@@ -31,5 +31,10 @@ final class BinaryChop
 
         return $result;
     }
+
+    public static function chop3(int $n, array $numbers): int
+    {
+//        return $n % 2 == 0 ? -1 : array_search($n, $numbers) ?? -1;
+    }
 }
 
