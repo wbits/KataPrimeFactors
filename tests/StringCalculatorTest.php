@@ -12,5 +12,10 @@ final class StringCalculatorTest extends TestCase
     {
         self::assertEquals(0, StringCalculator::add(''));
     }
+
+    public function testItReturnsTheNumberInAString()
+    {
+        self::assertEquals(1, StringCalculator::add('1'));
+    }
 }
 
