@@ -27,5 +27,10 @@ final class StringCalculatorTest extends TestCase
     {
         self::assertEquals(6, StringCalculator::add("1\n2,3"));
     }
+
+    public function testItSupportsCustomDelimiters()
+    {
+        self::assertEquals(3, StringCalculator::add("//;\n1;2"));
+    }
 }
 
