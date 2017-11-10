@@ -6,37 +6,53 @@ namespace PrimeFactors;
 
 final class StringCalculator
 {
-    public static function add(string $numbers): int
+    private $negatives = [];
+    private $delimiter = ',';
+    private $total = 0;
+
+    public function add(string $numbers): int
     {
-        $lines = explode("\n", $numbers);
+        $this->setDelimiter($numbers);
+        array_map([$this, 'countLine'], explode("\n", $numbers));
 
-        $delimiter = ',';
-        $firstLine = $lines[0];
-        $result = 0;
-        $negativeNumbers = [];
-
-        if (substr($firstLine, 0, 2) === '//') {
-            $delimiter = substr($firstLine, 2, 1);
+        if ($this->hasNegatives()) {
+            throw new \InvalidArgumentException(implode(', ', $this->negatives));
         }
 
-        foreach ($lines as $line)
-        {
-            $parts = explode($delimiter, $line);
-            foreach ($parts as $number) {
-                $intNumber = (int) $number;
+        return $this->total;
+    }
 
-                if ($intNumber < 0) {
-                    $negativeNumbers[] = $number;
-                }
-                $result += $intNumber;
-            }
+    private function countLine(string $line)
+    {
+        $numbers = explode($this->delimiter, $line);
+        foreach ($numbers as $number) {
+            $this->addNumber((int) $number);
         }
+    }
 
-        if (count($negativeNumbers)) {
-            throw new \InvalidArgumentException(implode(', ', $negativeNumbers));
+    private function addNumber(int $number)
+    {
+        if ($number < 0) {
+            $this->addNegative($number);
         }
+        $this->total += $number;
+    }
 
-        return $result;
+    private function addNegative(int $number)
+    {
+        $this->negatives[] = (string) $number;
+    }
+
+    private function setDelimiter(string $numbers)
+    {
+        if (substr($numbers, 0, 2) === '//') {
+            $this->delimiter = substr($numbers, 2, 1);
+        }
+    }
+
+    private function hasNegatives()
+    {
+        return (bool) count($this->negatives);
     }
 }
 

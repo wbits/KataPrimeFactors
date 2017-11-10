@@ -8,29 +8,39 @@ use PHPUnit\Framework\TestCase;
 
 final class StringCalculatorTest extends TestCase
 {
+    /**
+     * @var StringCalculator
+     */
+    private $calculator;
+
+    protected function setUp()
+    {
+        $this->calculator = new StringCalculator();
+    }
+
     public function testItReturnsZeroWhenEmptyStringIsPassed()
     {
-        self::assertEquals(0, StringCalculator::add(''));
+        self::assertEquals(0, $this->calculator->add(''));
     }
 
     public function testItReturnsTheNumberInAString()
     {
-        self::assertEquals(1, StringCalculator::add('1'));
+        self::assertEquals(1, $this->calculator->add('1'));
     }
 
     public function testItAddsMultipleNumbersInAString()
     {
-        self::assertEquals(3, StringCalculator::add('1,2'));
+        self::assertEquals(3, $this->calculator->add('1,2'));
     }
 
     public function testItSupportsNewLines()
     {
-        self::assertEquals(6, StringCalculator::add("1\n2,3"));
+        self::assertEquals(6, $this->calculator->add("1\n2,3"));
     }
 
     public function testItSupportsCustomDelimiters()
     {
-        self::assertEquals(3, StringCalculator::add("//;\n1;2"));
+        self::assertEquals(3, $this->calculator->add("//;\n1;2"));
     }
 
     public function testItThrowsAnExceptionWhenANegativeNumberIsPassed()
@@ -38,7 +48,7 @@ final class StringCalculatorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('-1');
 
-        StringCalculator::add('-1');
+        $this->calculator->add('-1');
     }
 
     public function testItThrowsAnExceptionWithAllNegativeNumbersInTheMessage()
@@ -46,7 +56,7 @@ final class StringCalculatorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('-1, -2');
 
-        StringCalculator::add('-1,-2,3');
+        $this->calculator->add('-1,-2,3');
     }
 }
 
