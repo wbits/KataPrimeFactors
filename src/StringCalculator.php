@@ -13,6 +13,7 @@ final class StringCalculator
         $delimiter = ',';
         $firstLine = $lines[0];
         $result = 0;
+        $negativeNumbers = [];
 
         if (substr($firstLine, 0, 2) === '//') {
             $delimiter = substr($firstLine, 2, 1);
@@ -25,10 +26,14 @@ final class StringCalculator
                 $intNumber = (int) $number;
 
                 if ($intNumber < 0) {
-                    throw new \InvalidArgumentException($number);
+                    $negativeNumbers[] = $number;
                 }
                 $result += $intNumber;
             }
+        }
+
+        if (count($negativeNumbers)) {
+            throw new \InvalidArgumentException(implode(', ', $negativeNumbers));
         }
 
         return $result;
