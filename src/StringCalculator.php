@@ -9,6 +9,7 @@ final class StringCalculator
     public static function add(string $numbers): int
     {
         $lines = explode("\n", $numbers);
+
         $delimiter = ',';
         $firstLine = $lines[0];
         $result = 0;

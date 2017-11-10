@@ -36,6 +36,7 @@ final class StringCalculatorTest extends TestCase
     public function testItThrowsAnExceptionWhenANegativeNumberIsPassed()
     {
         $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('-1');
 
         StringCalculator::add('-1');
     }
