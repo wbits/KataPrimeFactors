@@ -13,16 +13,17 @@ final class StringCalculator
     public function add(string $numbers): int
     {
         $this->setDelimiter($numbers);
-        array_map([$this, 'countLine'], explode("\n", $numbers));
+        array_map([$this, 'addNumbersInAString'], explode("\n", $numbers));
 
         if ($this->hasNegatives()) {
-            throw new \InvalidArgumentException(implode(', ', $this->negatives));
+            $message = implode(', ', self::intArrayToStringArray($this->negatives));
+            throw new \InvalidArgumentException($message);
         }
 
         return $this->total;
     }
 
-    private function countLine(string $line)
+    private function addNumbersInAString(string $line)
     {
         $numbers = explode($this->delimiter, $line);
         foreach ($numbers as $number) {
@@ -32,18 +33,26 @@ final class StringCalculator
 
     private function addNumber(int $number)
     {
+        if ($number < 0) {
+            $this->addNegative($number);
+            return;
+        }
+
+        $this->addPositive($number);
+    }
+
+    private function addPositive(int $number)
+    {
         if ($number > 1000) {
             return;
         }
-        if ($number < 0) {
-            $this->addNegative($number);
-        }
+
         $this->total += $number;
     }
 
     private function addNegative(int $number)
     {
-        $this->negatives[] = (string) $number;
+        $this->negatives[] = $number;
     }
 
     private function setDelimiter(string $numbers)
@@ -56,6 +65,17 @@ final class StringCalculator
     private function hasNegatives()
     {
         return (bool) count($this->negatives);
+    }
+
+    /**
+     * @param int[] $integers
+     * @return string[]
+     */
+    private static function intArrayToStringArray(array $integers): array
+    {
+        return array_map(function (int $number) {
+            return (string) $number;
+        }, $integers);
     }
 }
 
