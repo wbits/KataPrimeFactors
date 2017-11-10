@@ -40,5 +40,13 @@ final class StringCalculatorTest extends TestCase
 
         StringCalculator::add('-1');
     }
+
+    public function testItThrowsAnExceptionWithAllNegativeNumbersInTheMessage()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('-1, -2');
+
+        StringCalculator::add('-1,-2,3');
+    }
 }
 
