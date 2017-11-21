@@ -27,22 +27,22 @@ final class StringCalculator2
         return (int) array_sum(array_filter($positiveNumbers, [self::class, 'isNotBiggerThanThousand']));
     }
 
-    public static function convertToInteger(string $string): int
+    private static function convertToInteger(string $string): int
     {
         return (int) $string;
     }
 
-    public static function isNegative(int $number): bool
+    private static function isNegative(int $number): bool
     {
         return $number < 0;
     }
 
-    public static function isNotBiggerThanThousand(int $number): bool
+    private static function isNotBiggerThanThousand(int $number): bool
     {
         return $number < 1001;
     }
 
-    public static function numbersToString(int ...$numbers): string
+    private static function numbersToString(int ...$numbers): string
     {
         return implode(', ', $numbers);
     }
