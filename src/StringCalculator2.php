@@ -8,32 +8,26 @@ final class StringCalculator2
 {
     public static function add(string $text): int
     {
-        $splitPattern = '\\n';
-        $delimiterList = [','];
+        $splitPattern = '\\n|,';
 
-        if (strpos($text, '//') !== false) {
+        if (mb_strpos($text, '//') !== false) {
             preg_match_all('/\/\/\[?([^\]]+)\]?\\n/', $text, $matches);
-            $delimiterList = array_map('preg_quote', $matches[1]);
-        }
-        foreach ($delimiterList as $delimiter) {
-            $splitPattern .= sprintf('|%s', $delimiter);
+            $splitPattern = '\\n|' . implode('|', array_map('preg_quote', $matches[1]));
         }
 
-        $stringParts = mb_split($splitPattern, $text);
-        $numbers = array_map([self::class, 'convertToInteger'], $stringParts);
-        $negativeNumbers = array_filter($numbers, [self::class, 'isNegative']);
+        $allNumbers = array_map([self::class, 'convertToInteger'], mb_split($splitPattern, $text));
+        $negativeNumbers = array_filter($allNumbers, [self::class, 'isNegative']);
+        $positiveNumbers = array_diff($allNumbers, $negativeNumbers);
+
         if (count($negativeNumbers)) {
             $message = sprintf('The following numbers are not allowed: %s', self::numbersToString(...$negativeNumbers));
             throw new \InvalidArgumentException($message);
         }
 
-        $positiveNumbers = array_diff($numbers, $negativeNumbers);
-        $numbersSmallerThanThousand = array_filter($positiveNumbers, [self::class, 'isNotBiggerThanThousand']);
-
-        return (int) array_sum($numbersSmallerThanThousand);
+        return (int) array_sum(array_filter($positiveNumbers, [self::class, 'isNotBiggerThanThousand']));
     }
 
-    public static function convertToInteger(string $string)
+    public static function convertToInteger(string $string): int
     {
         return (int) $string;
     }
@@ -48,7 +42,7 @@ final class StringCalculator2
         return $number < 1001;
     }
 
-    public static function numbersToString(int ...$numbers)
+    public static function numbersToString(int ...$numbers): string
     {
         return implode(', ', $numbers);
     }
